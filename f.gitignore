@@ -1,0 +1,20 @@
+
+# .env
+node_modules
+# build
+# static
+package-lock.json
+node_modules/
+
+
+# Build
+dist/
+/npm-debug.log
+
+# new parcel
+.cache
+/.cache
+/dist
+/node_modules
+# /package-lock.json
+/.DS_Store

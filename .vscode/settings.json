@@ -1,0 +1,49 @@
+{
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": ["--line-length", "120"],
+  "editor.suggestSelection": "first",
+  // 
+  // "python.pythonPath": "${workspaceFolder}/env/bin/python3",
+  // "python.linting.pylintPath": "pylint",
+  // "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+  // "python.linting.pylintEnabled": true,
+  // "python.venvPath": "${workspaceFolder}/env/bin/python3",
+  // "python.linting.pycodestyleEnabled": false,
+  // "python.linting.enabled": true,
+  // "python.linting.pycodestyleArgs": ["--ignore=E501"],
+  //   "files.exclude": {
+  //     "**/*.pyc": true,
+  //     //
+  //     "**/.classpath": true,
+  //     "**/.project": true,
+  //     "**/.settings": true,
+  //     "**/.factorypath": true
+  //   },
+  //   "editor.detectIndentation": false,
+  //   "editor.wordWrap": "on",
+  //   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  //   "[javascript]": {
+  //     "editor.defaultFormatter": "esbenp.prettier-vscode",
+  //     "editor.tabSize": 2
+  //   },
+  //   "[html]": {
+  //     "editor.defaultFormatter": "esbenp.prettier-vscode",
+  //     "editor.tabSize": 2
+  //   },
+  //
+  // "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  // "git.suggestSmartCommit": false,
+  // "git.ignoreRebaseWarning": true,
+  // "git.autorefresh": true,
+  // "files.watcherExclude": {
+  //   "**/.git/objects/**": true,
+  //   "**/.git/subtree-cache/**": true,
+  //   "**/node_modules/*/**": true
+  // }
+}
