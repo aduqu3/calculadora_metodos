@@ -1,43 +1,107 @@
-from tkinter.constants import BOTH
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import text
 import tkinter as tk
 import tkinter.ttk as ttk
+from tkinter.constants import BOTH
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import text
+
+from math import pi,e,sin,cos,tan,log,log10,ceil,degrees,radians,exp,asin,acos,floor
 
 # colocar iconos o imagenes en ventanas
 # from PIL import ImageTk,ImageTk
 
 root = tk.Tk()
 
-# graficar funciones
+# =======convierte un string a una funcion======================================
+# there should be a better way using regex
+replacements = {
+    'sin' : 'np.sin',
+    'cos' : 'np.cos',
+    'exp': 'np.exp',
+    '^': '**',
+    'pi': 'np.pi'
+}
 
-# graficar ecuacion
+# think of more security hazards here
+forbidden_words = [
+    'import',
+    'shutil',
+    'sys',
+    'subprocess',
+]
 
+def string2func(string):
+    ''' evaluates the string and returns a function of x '''
+    for word in forbidden_words:
+        if word in string:
+            raise ValueError(
+                '"{}" is forbidden to use in math expression'.format(word)
+            )
 
-def graph():
-    t = np.arange(0, 3, .01)
+    for old, new in replacements.items():
+        string = string.replace(old, new)
+
+    # print(string)
+    # return string
+
+    def func(x):
+        return eval(string)
+
+    return func
+
+# =============grafica una funcion dada========================================
+def graph(str):
+    # t = np.arange(0, 3, .01)
     # ln(x) + sin(3x) + e^4
-    plt.plot(t, 2 * np.sin(2 * np.pi * t))
+    # plt.plot(t, 2 * np.sin(2 * np.pi * t))
+    # x = np.linspace(0, 3, .01)
+
+    func = string2func(str)
+    x = np.linspace(0, 2, 250)
+    plt.plot(x, func(x))
+    plt.xlim(0, 2)
     plt.show()
 
 
-
-#===============metodo de simpson=========================================INICIO
+#===============metodo de simpson 1/3=========================================INICIO
 def window_simpson_13():
     global window_1
-    
+   
+
     def press(str):
-        print(str.get())
-        if(str.get()==''):
+        # print(str.get())
+        expr = str.get()
+        print(expr)
+        if(expr == ''):
             print("esta vacio")
         else:
-            # print("no esta vacio")
+            print("no esta vacio")
+            print(expr)
+
+            # procesar la info y vaciar el StringVar tk_string, para que no se muestre nuevamente
+            # la funcion ingresada con anterioridad
+           
             # btn graficar ecuacion
-            btn_graph = ttk.Button(window_1, text="Graficar", command=graph)
+            btn_graph = ttk.Button(window_1, text="Graficar", command=lambda: graph(expr))
             btn_graph.pack()
 
-    global window_1
+            var = tk.IntVar()
+            btn_clean = ttk.Button(window_1, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.place(relx=.5, rely=.5, anchor="c")
+
+            print("waiting...")
+            btn_clean.wait_variable(var)
+            print("done waiting.")
+
+            # limpiar variables
+            # btn_graph.destroy()
+            # btn_clean.destroy()
+            window_1.destroy()
+            expr=''
+            str.set('')
+
     window_1 = tk.Toplevel(root)
     window_1.geometry("800x250")
     window_1.title("Simpson 1/31")
@@ -46,15 +110,11 @@ def window_simpson_13():
     lbl.pack(fill = BOTH)
 
     # colocar label para el input
-    # input text
-    user_password = ttk.Label(window_1, text = "Password")
-    user_password.pack()
+    lbl_entry = ttk.Label(window_1, text = "Password")
+    lbl_entry.pack()
 
-    # input text
-
-
-    # cada vez que presione los captura...
-    # expr = ''
+    # se crea un entry, para el ingreso de texto desde teclado
+    # luego guardamos esa informacion dentro de un StringVar tk_string
     tk_string = tk.StringVar()
     entry = ttk.Entry(window_1, textvariable=tk_string)
     entry.configure(background="white")
@@ -73,7 +133,7 @@ def window_simpson_13():
     # btn close window
     # btn_close = tk.Button(window_1, text="Close window",command=lambda: window_1.destroy())
     # btn_close.pack()
-#===============metodo de simpson=========================================FIN
+#===============metodo de simpson  1/3 =========================================FIN
 
 
 
