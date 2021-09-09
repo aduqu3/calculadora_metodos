@@ -1,6 +1,5 @@
 import sys
 from math import *
-from sympy import *
 import numpy as np
 
 def hello():
@@ -51,25 +50,21 @@ def simpson_13(a, b, n, f):
     #Multiplicamos por h/3
     rest = suma * (h / 3)
     #Retornamos el resultado
+    print(rest)
     return rest
 # ============================ SIMPSON 1/3 FIN ===================
 
 
 # ============================ TRAPECIOS INI ===================
-#TRAPECIOS
-
-#Ingrese su parametro inicial
-# a = 1
-# #Ingrese su parametro final
-# b = 2
-# #Ingrese el numero de particiones
-# m = 4
-# f= "sin(2*pi*x)+x^2"
-# funcion = 
-
-
+# metodo trapecios
 def trapecios(func, a, b, m):
-    func = sympify(func)
+
+    def funcx(x, f):
+          return eval(f)
+
+    func = string_replace(func)
+
+    print(func)
     h = (b-a)/float(m)
     s = 0
     n = 0
@@ -78,15 +73,12 @@ def trapecios(func, a, b, m):
 
     for i in range(1,m):
         n = a + (i*h)
-        n_evaluado = func.evalf(subs = {"x" : n}) #evalua n en la funcion descrita
+        n_evaluado = funcx(n, func) #evalua n en la funcion descrita
         s = s + n_evaluado
 
-    a_evaluado = func.evalf(subs = {"x" : a}) #evalua a en la funcion descrita, lo mismo con b en la siguiente linea
-    b_evaluado = func.evalf(subs = {"x" : b})
+    a_evaluado = funcx(a, func) #evalua a en la funcion descrita, lo mismo con b en la siguiente linea
+    b_evaluado = funcx(b, func)
     result = h/2 * (a_evaluado + 2*s + b_evaluado)
 
     return result
-
-
-# print(trapecios(funcion,a,b,m) )  #el primer parametro debe ser la funcion en expresion literal
-# ============================ TRAPECIOS 3/8 FIN ===================
+# ============================ TRAPECIOS FIN ===================
