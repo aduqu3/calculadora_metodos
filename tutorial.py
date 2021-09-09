@@ -518,6 +518,118 @@ def window_simpson_38():
     submit_btn.pack()
 #========================= WINDOW METODO SIMPSON 3/8 ========================================= FIN
 
+#========================= WINDOW METODO FALSA POSICIOM ========================================= INI
+def window_falsa_posicion():
+    global window_5
+   
+    def press(func_d, a_d, b_d, n_d,):
+        func = func_d.get()
+        a = a_d.get()
+        b = b_d.get()
+        n = n_d.get()
+        
+        if( len(func) and len(a) and len(b) and len(n)):
+            # print("vamos a hacer algo")
+            a = int(a)
+            b = int(b)
+            n = float(n)
+            
+            # procesar la info y vaciar el StringVar tk_string, para que no se muestre nuevamente
+            # la funcion ingresada con anterioridad
+           
+            # btn graficar ecuacion
+            btn_graph = ttk.Button(window_5, text="Graficar", command=lambda: graph(func, n, a, b))
+            btn_graph.pack()
+
+            # luego llamar metodo simpson 1/3
+            # y mostrar el resultado en la ventana
+            result_lbl = tk.Label(window_5, text=('Resultado Falsa posicion: ', falsa_posicion(func, a, b, n)))
+            result_lbl.pack(fill = BOTH)
+
+            # btn para limpiar la interfaz luego de realizar un calculo
+            var = tk.IntVar()
+            btn_clean = ttk.Button(window_5, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack()
+            # btn_clean.place(relx=.5, rely=.5, anchor="c")
+
+            # print("waiting...")
+            btn_clean.wait_variable(var)
+            # print("done waiting.")
+
+            # limpiar variables // destruir elementos
+            btn_graph.destroy()
+            result_lbl.destroy()
+            btn_clean.destroy()
+            # btn_clean.destroy()
+            # window_1.destroy()
+            func = ''
+            n = ''
+            a = ''
+            b = ''
+            func_d.set('')
+            n_d.set('')
+            a_d.set('')
+            b_d.set('')
+        else:
+            print("vacio: por favor ingrese todos los campos")
+            
+
+    window_5 = tk.Toplevel(root)
+    window_5.geometry("800x400")
+    window_5.title("Falsa posicion")
+    
+    lbl = tk.Label(window_5, text="El metodo de Falsa posicion...")
+    lbl.pack(fill = BOTH)
+
+    # func
+    # colocar label para el input
+    func_lbl = ttk.Label(window_5, text = "funcion:")
+    func_lbl.pack()
+    # se crea un entry, para el ingreso de texto desde teclado
+    # luego guardamos esa informacion dentro de un StringVar tk_string
+    func_str = tk.StringVar()
+    func_inp = ttk.Entry(window_5, textvariable=func_str)
+    func_inp.configure(background="white")
+    func_inp.focus()
+    func_inp.pack()
+    
+    # a
+    a_lbl = ttk.Label(window_5, text = "a:")
+    a_lbl.pack()
+    
+    a_str = tk.StringVar()
+    a_inp = ttk.Entry(window_5, textvariable=a_str)
+    a_inp.configure(background="white")
+    a_inp.focus()
+    a_inp.pack()
+    # 
+
+    # b
+    b_lbl = ttk.Label(window_5, text = "b:")
+    b_lbl.pack()
+    
+    b_str = tk.StringVar()
+    b_inp = ttk.Entry(window_5, textvariable=b_str)
+    b_inp.configure(background="white")
+    b_inp.focus()
+    b_inp.pack()
+    # 
+
+    # n
+    n_lbl = ttk.Label(window_5, text = "n:")
+    n_lbl.pack()
+    
+    n_str = tk.StringVar()
+    n_inp = ttk.Entry(window_5, textvariable=n_str)
+    n_inp.configure(background="white")
+    n_inp.focus()
+    n_inp.pack()
+    # 
+    
+    submit_btn = ttk.Button(window_5, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack()
+#========================= WINDOW METODO FALSA POSICIOM ========================================= FIN
+
 
 #=============== WINDOW ABOUT US // ventana acerca de nosotros========================================= INI
 def window_about_us():
@@ -548,13 +660,17 @@ btn0.pack(padx=5, pady=20)
 btn1 = tk.Button(root, text="Trapecios", command=window_trapecios)
 btn1.pack(padx=5, pady=5)
 
-# btn para ventana trapecios
+# btn para ventana 
 btn2 = tk.Button(root, text="Biseccion", command=window_biseccion)
 btn2.pack(padx=5, pady=5)
 
-# btn para ventana trapecios
+# btn para ventana 
 btn3 = tk.Button(root, text="Simpson 3/8", command=window_simpson_38)
 btn3.pack(padx=5, pady=5)
+
+# btn para ventana falsa posicion
+btn4 = tk.Button(root, text="Falsa Posicion", command=window_falsa_posicion)
+btn4.pack(padx=5, pady=5)
 
 
 

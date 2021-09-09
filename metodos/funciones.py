@@ -119,7 +119,7 @@ def simpson_38(f,x0,xf,n):
     return eval(f)
 
   f = string_replace(f)
-  
+
   # Integracion mediante Simpson 3/8
   n = n - n%3 # truncar al multiplo de 3 mas cercano
   if n<=0:
@@ -133,3 +133,27 @@ def simpson_38(f,x0,xf,n):
     r=(3.*h/8)*suma
   return r
 # ============================ SIMPSON 3/7  FIN ===================
+
+# ============================ FALSA POSICION INI ===================
+def falsa_posicion(f,a,b,tolera):
+  def fx(x,f):
+    return eval(f)
+
+  f = string_replace(f)
+
+  tramo = abs(b-a)
+  while not(tramo<=tolera):
+      fa = fx(a,f)
+      fb = fx(b,f)
+      c = b - fb*(a-b)/(fa-fb)
+      fc = fx(c,f)
+      cambia = np.sign(fa)*np.sign(fc)
+      if (cambia > 0):
+          tramo = abs(c-a)
+          a = c
+      else:
+          tramo = abs(b-c)
+          b = c
+  raiz = c
+  return raiz
+# ============================ FALSA POSICIOM FIN ===================
