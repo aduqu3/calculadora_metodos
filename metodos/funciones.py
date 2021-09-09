@@ -112,3 +112,24 @@ def bisection(f,a,b,N):
           return None
   return (a_n + b_n)/2
 # ============================ BISECCION  FIN ===================
+
+# ============================ SIMPSON 3/7  INI ===================
+def simpson_38(f,x0,xf,n):
+  def fx(x,f):
+    return eval(f)
+
+  f = string_replace(f)
+  
+  # Integracion mediante Simpson 3/8
+  n = n - n%3 # truncar al multiplo de 3 mas cercano
+  if n<=0:
+    n = 1
+  h = (xf-x0)/n
+  x = x0
+  suma = 0
+  for j in range(n//3):
+    suma += fx(x, f) + 3.*fx(x+h, f) + 3.*fx(x+2*h, f) + fx(x+3*h, f)
+    x += 3*h
+    r=(3.*h/8)*suma
+  return r
+# ============================ SIMPSON 3/7  FIN ===================
