@@ -113,7 +113,7 @@ def bisection(f,a,b,N):
   return (a_n + b_n)/2
 # ============================ BISECCION  FIN ===================
 
-# ============================ SIMPSON 3/7  INI ===================
+# ============================ SIMPSON 3/8  INI ===================
 def simpson_38(f,x0,xf,n):
   def fx(x,f):
     return eval(f)
@@ -132,7 +132,7 @@ def simpson_38(f,x0,xf,n):
     x += 3*h
     r=(3.*h/8)*suma
   return r
-# ============================ SIMPSON 3/7  FIN ===================
+# ============================ SIMPSON 3/8  FIN ===================
 
 # ============================ FALSA POSICION INI ===================
 def falsa_posicion(f,a,b,tolera):
@@ -157,3 +157,33 @@ def falsa_posicion(f,a,b,tolera):
   raiz = c
   return raiz
 # ============================ FALSA POSICIOM FIN ===================
+
+
+# ============================ NEWTON-RAPHSON INI ===================
+def newton_raphson(f,df,x0,tolera):
+  def fx(x, f):
+    return eval(f)
+
+  def dfx(x, df):
+    return eval(df)
+  
+  f = string_replace(f)
+  df = string_replace(df)
+
+  tabla = []
+  tramo = abs(2*tolera)
+  xi = x0
+  while (tramo>=tolera):
+      fxi =  fx(xi, f)
+      dfxi = dfx(xi,df)
+      xnuevo = xi - fxi/dfxi
+      tramo  = abs(xnuevo-xi)
+      tabla.append([xi,xnuevo,tramo])
+      xi = xnuevo
+
+  # convierte la lista a un arreglo.
+  tabla = np.array(tabla)
+  n = len(tabla)
+
+  return ("raiz",xi,"con error de", tramo)
+# ============================ NEWTON-RAPHSON FIN ===================
