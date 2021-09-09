@@ -187,3 +187,43 @@ def newton_raphson(f,df,x0,tolera):
 
   return ("raiz",xi,"con error de", tramo)
 # ============================ NEWTON-RAPHSON FIN ===================
+
+# ================================ SECANTE INI =========================
+def secante(f, xa, tolera):
+  # evaluar funcion en x
+  def fx(x, f):
+    return eval(f)
+
+  # tabla secante
+  def secante_tabla(f,xa,tolera):
+    dx = 4*tolera
+    xb = xa + dx
+    tramo = dx
+    tabla = []
+    while (tramo>=tolera):
+        fa = fx(xa, f)
+        fb = fx(xb, f)
+        xc = xa - fa*(xb-xa)/(fb-fa)
+        tramo = abs(xc-xa)
+        
+        tabla.append([xa,xb,xc,tramo])
+        xb = xa
+        xa = xc
+
+    tabla = np.array(tabla)
+    return (tabla)
+
+  # reemplazar caracteres en la funcion...
+  f = string_replace(f)
+
+  tabla = secante_tabla(f,xa,tolera)
+  n = len(tabla)
+  raiz = tabla[n-1,2]
+
+  np.set_printoptions(precision=4)
+  # print('[xa ,\t xb , \t xc , \t tramo]')
+  # for i in range(0,n,1):
+  #     print(tabla[i])
+
+  return ("raiz en: ", raiz)
+# ================================ SECANTE FIN =========================

@@ -743,6 +743,118 @@ def window_newton_raphson():
     submit_btn.pack()
 #========================= WINDOW METODO NEWTON-RAPHSON ========================================= FIN
 
+#========================= WINDOW METODO SECANTE ========================================= INI
+def window_secante():
+    global window_7
+   
+    def press(func_d, a_d, b_d, n_d,):
+        func = func_d.get()
+        a = a_d.get()
+        b = b_d.get() #  xa float
+        n = n_d.get() # tolaera float
+        
+        if( len(func) and len(a) and len(b) and len(n)):
+            # print("vamos a hacer algo")
+            a = int(a)
+            b = float(b)
+            n = float(n)
+            
+            # procesar la info y vaciar el StringVar tk_string, para que no se muestre nuevamente
+            # la funcion ingresada con anterioridad
+           
+            # btn graficar ecuacion
+            btn_graph = ttk.Button(window_7, text="Graficar", command=lambda: graph(func, 20, a, 20))
+            btn_graph.pack()
+
+            # luego llamar metodo simpson 1/3
+            # y mostrar el resultado en la ventana
+            result_lbl = tk.Label(window_7, text=('Resultado Falsa posicion: ',secante(func, b, n)))
+            result_lbl.pack(fill = BOTH)
+
+            # btn para limpiar la interfaz luego de realizar un calculo
+            var = tk.IntVar()
+            btn_clean = ttk.Button(window_7, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack()
+            # btn_clean.place(relx=.5, rely=.5, anchor="c")
+
+            # print("waiting...")
+            btn_clean.wait_variable(var)
+            # print("done waiting.")
+
+            # limpiar variables // destruir elementos
+            btn_graph.destroy()
+            result_lbl.destroy()
+            btn_clean.destroy()
+            # btn_clean.destroy()
+            # window_1.destroy()
+            func = ''
+            n = ''
+            a = ''
+            b = ''
+            func_d.set('')
+            n_d.set('')
+            a_d.set('')
+            b_d.set('')
+        else:
+            print("vacio: por favor ingrese todos los campos")
+            
+
+    window_7 = tk.Toplevel(root)
+    window_7.geometry("800x400")
+    window_7.title("Secante")
+    
+    lbl = tk.Label(window_7, text="El metodo de Secante...")
+    lbl.pack(fill = BOTH)
+
+    # func
+    # colocar label para el input
+    func_lbl = ttk.Label(window_7, text = "f:")
+    func_lbl.pack()
+    # se crea un entry, para el ingreso de texto desde teclado
+    # luego guardamos esa informacion dentro de un StringVar tk_string
+    func_str = tk.StringVar()
+    func_inp = ttk.Entry(window_7, textvariable=func_str)
+    func_inp.configure(background="white")
+    func_inp.focus()
+    func_inp.pack()
+    
+    # a
+    a_lbl = ttk.Label(window_7, text = "a")
+    a_lbl.pack()
+    
+    a_str = tk.StringVar()
+    a_inp = ttk.Entry(window_7, textvariable=a_str)
+    a_inp.configure(background="white")
+    a_inp.focus()
+    a_inp.pack()
+    # 
+
+    # b
+    b_lbl = ttk.Label(window_7, text = "xa:")
+    b_lbl.pack()
+    
+    b_str = tk.StringVar()
+    b_inp = ttk.Entry(window_7, textvariable=b_str)
+    b_inp.configure(background="white")
+    b_inp.focus()
+    b_inp.pack()
+    # 
+
+    # n
+    n_lbl = ttk.Label(window_7, text = "tolerancia:")
+    n_lbl.pack()
+    
+    n_str = tk.StringVar()
+    n_inp = ttk.Entry(window_7, textvariable=n_str)
+    n_inp.configure(background="white")
+    n_inp.focus()
+    n_inp.pack()
+    # 
+    
+    submit_btn = ttk.Button(window_7, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack()
+#========================= WINDOW METODO SECANTE ========================================= FIN
+
 
 #=============== WINDOW ABOUT US // ventana acerca de nosotros========================================= INI
 def window_about_us():
@@ -788,6 +900,9 @@ btn4.pack(padx=5, pady=5)
 # btn para ventana falsa posicion
 btn5 = tk.Button(root, text="Newton Raphson", command=window_newton_raphson)
 btn5.pack(padx=5, pady=5)
+
+btn6 = tk.Button(root, text="Secante", command=window_secante)
+btn6.pack(padx=5, pady=5)
 
 
 # btn para ventana acerca de nosotros
