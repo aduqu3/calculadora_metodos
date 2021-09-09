@@ -82,3 +82,33 @@ def trapecios(func, a, b, m):
 
     return result
 # ============================ TRAPECIOS FIN ===================
+
+# ============================ BISECCION  INI ===================
+def bisection(f,a,b,N):
+  def fx(x,f):
+    return eval(f)
+
+  f = string_replace(f)
+
+  if fx(a,f)*fx(b,f) >= 0:
+      print("Bisection method fails.")      
+      return None
+  a_n = a
+  b_n = b
+  for n in range(1,N+1):
+      m_n = (a_n + b_n)/2
+      f_m_n = fx(m_n,f)
+      if fx(a_n,f)*f_m_n < 0:
+          a_n = a_n
+          b_n = m_n
+      elif fx(b_n, f)*f_m_n < 0:
+          a_n = m_n
+          b_n = b_n
+      elif f_m_n == 0:
+          print("Found exact solution.")
+          return m_n
+      else:
+          print("Bisection method fails.")
+          return None
+  return (a_n + b_n)/2
+# ============================ BISECCION  FIN ===================
