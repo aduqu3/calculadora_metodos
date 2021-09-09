@@ -855,6 +855,117 @@ def window_secante():
     submit_btn.pack()
 #========================= WINDOW METODO SECANTE ========================================= FIN
 
+#========================= WINDOW METODO PUNTO FIJO ========================================= INI
+def window_punto_fijo():
+    global window_8
+   
+    def press(func_d, a_d, b_d, n_d,):
+        func = func_d.get()
+        a = a_d.get()
+        b = b_d.get()
+        n = n_d.get()
+        
+        if( len(func) and len(a) and len(b) and len(n)):
+            # print("vamos a hacer algo")
+            a = float(a)
+            b = float(b)
+            n = int(n)
+            
+            # procesar la info y vaciar el StringVar tk_string, para que no se muestre nuevamente
+            # la funcion ingresada con anterioridad
+           
+            # btn graficar ecuacion
+            btn_graph = ttk.Button(window_8, text="Graficar", command=lambda: graph(func, int(n), int(a), 20))
+            btn_graph.pack()
+
+            # 
+            result_lbl = tk.Label(window_8, text=('Punto Fijo solucion: x ', punto_fijo(func, a, b, n)))
+            result_lbl.pack(fill = BOTH)
+
+            # btn para limpiar la interfaz luego de realizar un calculo
+            var = tk.IntVar()
+            btn_clean = ttk.Button(window_8, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack()
+            # btn_clean.place(relx=.5, rely=.5, anchor="c")
+
+            # print("waiting...")
+            btn_clean.wait_variable(var)
+            # print("done waiting.")
+
+            # limpiar variables // destruir elementos
+            btn_graph.destroy()
+            result_lbl.destroy()
+            btn_clean.destroy()
+            # btn_clean.destroy()
+            # window_1.destroy()
+            func = ''
+            n = ''
+            a = ''
+            b = ''
+            func_d.set('')
+            n_d.set('')
+            a_d.set('')
+            b_d.set('')
+        else:
+            print("vacio: por favor ingrese todos los campos")
+            
+
+    window_8 = tk.Toplevel(root)
+    window_8.geometry("800x400")
+    window_8.title("Punto Fijo")
+    
+    lbl = tk.Label(window_8, text="El metodo de Punto Fijo...")
+    lbl.pack(fill = BOTH)
+
+    # func
+    # colocar label para el input
+    func_lbl = ttk.Label(window_8, text = "funcion:")
+    func_lbl.pack()
+    # se crea un entry, para el ingreso de texto desde teclado
+    # luego guardamos esa informacion dentro de un StringVar tk_string
+    func_str = tk.StringVar()
+    func_inp = ttk.Entry(window_8, textvariable=func_str)
+    func_inp.configure(background="white")
+    func_inp.focus()
+    func_inp.pack()
+    
+    # a
+    a_lbl = ttk.Label(window_8, text = "aprox:")
+    a_lbl.pack()
+    
+    a_str = tk.StringVar()
+    a_inp = ttk.Entry(window_8, textvariable=a_str)
+    a_inp.configure(background="white")
+    a_inp.focus()
+    a_inp.pack()
+    # 
+
+    # b
+    b_lbl = ttk.Label(window_8, text = "tol:")
+    b_lbl.pack()
+    
+    b_str = tk.StringVar()
+    b_inp = ttk.Entry(window_8, textvariable=b_str)
+    b_inp.configure(background="white")
+    b_inp.focus()
+    b_inp.pack()
+    # 
+
+    # n
+    n_lbl = ttk.Label(window_8, text = "n:")
+    n_lbl.pack()
+    
+    n_str = tk.StringVar()
+    n_inp = ttk.Entry(window_8, textvariable=n_str)
+    n_inp.configure(background="white")
+    n_inp.focus()
+    n_inp.pack()
+    # 
+    
+    submit_btn = ttk.Button(window_8, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack()
+#========================= WINDOW METODO PUNTO FIJO ========================================= FIN
+
 
 #=============== WINDOW ABOUT US // ventana acerca de nosotros========================================= INI
 def window_about_us():
@@ -879,7 +990,7 @@ def window_about_us():
 
 # btn para ventana simpson 1/3
 btn0 = tk.Button(root, text="Simpson 1/3", command=window_simpson_13)
-btn0.pack(padx=5, pady=20)
+btn0.pack(padx=5, pady=5)
 
 # btn para ventana trapecios
 btn1 = tk.Button(root, text="Trapecios", command=window_trapecios)
@@ -901,8 +1012,11 @@ btn4.pack(padx=5, pady=5)
 btn5 = tk.Button(root, text="Newton Raphson", command=window_newton_raphson)
 btn5.pack(padx=5, pady=5)
 
-btn6 = tk.Button(root, text="Secante", command=window_secante)
+btn6 = tk.Button(root, text="Newton Raphson", command=window_newton_raphson)
 btn6.pack(padx=5, pady=5)
+
+btn7 = tk.Button(root, text="Punto Fijo", command=window_punto_fijo)
+btn7.pack(padx=5, pady=5)
 
 
 # btn para ventana acerca de nosotros

@@ -227,3 +227,18 @@ def secante(f, xa, tolera):
 
   return ("raiz en: ", raiz)
 # ================================ SECANTE FIN =========================
+
+# ================================ PUNTO FIJO INI =========================
+def punto_fijo(func,  approx, tol, n):
+  def fx(x, f):
+    return eval(f)
+
+  func = string_replace(func)
+
+  for i in range(0, n):
+      p = fx(approx, func)
+      if abs(p-approx) < tol:
+          return p
+      approx = p
+  return "Method failed after {} iterations".format(n)
+# ================================ PUNTO FIJO FIN =========================
