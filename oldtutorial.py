@@ -130,7 +130,7 @@ def window_simpson_13():
 
             # luego llamar metodo simpson 1/3
             # y mostrar el resultado en la ventana
-            result_lbl = tk.Label(frame_1, text=('Resultado Simpson 1/3: ',simpson_13(a, b, n, func)))
+            result_lbl = tk.Label(frame_1, text=('Resultado Simpson 1/3: ',simpson_13(a, b, n, func)), font=("Helvetica", 14))
             result_lbl.pack(fill = BOTH, pady=10)
 
             # btn para limpiar la interfaz luego de realizar un calculo
@@ -180,7 +180,7 @@ def window_simpson_13():
     
     img3 = add_img("assets/simpson_13/3.png", frame_1, 10)
 
-    lbl4 = tk.Label(frame_1, text="", font=("Helvetica", 11), justify="left")
+    lbl4 = tk.Label(frame_1, text="Probar metodo:", font=("Helvetica", 11), justify="left")
     lbl4.pack(fill = BOTH, pady=10)
 
 
