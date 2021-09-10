@@ -647,12 +647,17 @@ def window_simpson_38():
 def window_falsa_posicion():
     global window_5
    
+    window_5 = tk.Toplevel(root)
+    frame_5 = scroll_bar(window_5)
+    window_5.geometry("500x500")
+    window_5.title("Falsa posicion")
+
     def press(func_d, a_d, b_d, n_d,):
         func = func_d.get()
         a = a_d.get()
         b = b_d.get()
         n = n_d.get()
-        
+
         if( len(func) and len(a) and len(b) and len(n)):
             # print("vamos a hacer algo")
             a = int(a)
@@ -663,18 +668,16 @@ def window_falsa_posicion():
             # la funcion ingresada con anterioridad
            
             # btn graficar ecuacion
-            btn_graph = ttk.Button(window_5, text="Graficar", command=lambda: graph(func, 20, a, b))
-            btn_graph.pack()
+            btn_graph = ttk.Button(frame_5, text="Graficar", command=lambda: graph(func, 20, a, b))
+            btn_graph.pack(pady=10)
 
-            # luego llamar metodo simpson 1/3
-            # y mostrar el resultado en la ventana
-            result_lbl = tk.Label(window_5, text=('Resultado Falsa posicion: ', falsa_posicion(func, a, b, n)))
-            result_lbl.pack(fill = BOTH)
+            result_lbl = tk.Label(frame_5, text=('Resultado Falsa posicion: ', falsa_posicion(func, a, b, n)), font=("Helvetica", 14))
+            result_lbl.pack(fill = BOTH, pady=10)
 
             # btn para limpiar la interfaz luego de realizar un calculo
             var = tk.IntVar()
-            btn_clean = ttk.Button(window_5, text="Limipiar", command=lambda: var.set(1))
-            btn_clean.pack()
+            btn_clean = ttk.Button(frame_5, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack(pady=10)
             # btn_clean.place(relx=.5, rely=.5, anchor="c")
 
             # print("waiting...")
@@ -686,7 +689,7 @@ def window_falsa_posicion():
             result_lbl.destroy()
             btn_clean.destroy()
             # btn_clean.destroy()
-            # window_1.destroy()
+            # frame_5.destroy()
             func = ''
             n = ''
             a = ''
@@ -698,61 +701,73 @@ def window_falsa_posicion():
         else:
             print("vacio: por favor ingrese todos los campos")
             
+    title_lbl = tk.Label(frame_5, text="Falsa Posicion\n",
+    font=("Helvetica", 14), justify="left")
+    title_lbl.pack(fill = BOTH)
 
-    window_5 = tk.Toplevel(root)
-    window_5.geometry("800x400")
-    window_5.title("Falsa posicion")
-    
-    lbl = tk.Label(window_5, text="El metodo de Falsa posicion...")
+    lbl = tk.Label(frame_5, text="La falsa posición es una alternativa a la bisección basada en una visualización gráfica.\nUn inconveniente del método de bisección es que al dividir el intervalo de xl \na xu en mitades iguales, no se toman en consideración las magnitudes de f(xl) y f(xu). \nPor ejemplo, si f(xl) está mucho más cercana a cero que f(xu), es lógico que la raíz \nse encuentre más cerca de xl que de xu. Un método alternativo que aprovecha \nesta visualización gráfica consiste en unir f(xl) y f(xu) con una línea recta. \nLa intersección de esta línea con el eje de las x representa una mejor aproximación de la raíz. \nEl hecho de que se reemplace la curva por una línea recta da una “falsa posición” \nde la raíz; de aquí el nombre de método de la falsa posición, o en latín, regula falsi. \nTambién se le conoce como método de interpolación lineal.\n",
+    font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
+
+    img = add_img("assets/falsa_posicion/1.png", frame_5, 10, 2, 2)
+
+        
+    lbl2 = tk.Label(frame_5, text="Usando triángulos semejantes, la intersección de la línea recta con el eje de las x se estima \nmediante una semejanza de triángulos, en la cual se despeja xr",
+    font=("Helvetica", 11), justify="left")
+    lbl2.pack(fill=BOTH, pady=10)
+
+    img2 = add_img("assets/falsa_posicion/2.png", frame_5, 10, 2, 2)
+    
+    test_lbl = tk.Label(frame_5, text="Probar metodo:", font=("Helvetica", 11), justify="left")
+    test_lbl.pack(fill = BOTH, pady=10)
 
     # func
     # colocar label para el input
-    func_lbl = ttk.Label(window_5, text = "funcion:")
+    func_lbl = ttk.Label(frame_5, text = "funcion: ", font=("Helvetica", 11), justify="left")
     func_lbl.pack()
     # se crea un entry, para el ingreso de texto desde teclado
     # luego guardamos esa informacion dentro de un StringVar tk_string
     func_str = tk.StringVar()
-    func_inp = ttk.Entry(window_5, textvariable=func_str)
+    func_inp = ttk.Entry(frame_5, textvariable=func_str)
     func_inp.configure(background="white")
     func_inp.focus()
-    func_inp.pack()
+    func_inp.pack(pady=10)
     
     # a
-    a_lbl = ttk.Label(window_5, text = "a:")
+    a_lbl = ttk.Label(frame_5, text = "a:", font=("Helvetica", 11))
     a_lbl.pack()
     
     a_str = tk.StringVar()
-    a_inp = ttk.Entry(window_5, textvariable=a_str)
+    a_inp = ttk.Entry(frame_5, textvariable=a_str)
     a_inp.configure(background="white")
     a_inp.focus()
-    a_inp.pack()
+    a_inp.pack(pady=10)
     # 
 
     # b
-    b_lbl = ttk.Label(window_5, text = "b:")
-    b_lbl.pack()
+    b_lbl = ttk.Label(frame_5, text = "b:", font=("Helvetica", 11))
+    b_lbl.pack(pady=10)
     
     b_str = tk.StringVar()
-    b_inp = ttk.Entry(window_5, textvariable=b_str)
+    b_inp = ttk.Entry(frame_5, textvariable=b_str)
     b_inp.configure(background="white")
     b_inp.focus()
-    b_inp.pack()
+    b_inp.pack(pady=10)
     # 
 
     # n
-    n_lbl = ttk.Label(window_5, text = "n:")
-    n_lbl.pack()
+    n_lbl = ttk.Label(frame_5, text = "n:", font=("Helvetica", 11))
+    n_lbl.pack(pady=10)
     
     n_str = tk.StringVar()
-    n_inp = ttk.Entry(window_5, textvariable=n_str)
+    n_inp = ttk.Entry(frame_5, textvariable=n_str)
     n_inp.configure(background="white")
     n_inp.focus()
-    n_inp.pack()
+    n_inp.pack(pady=10)
     # 
-    
-    submit_btn = ttk.Button(window_5, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
-    submit_btn.pack()
+        
+    submit_btn = ttk.Button(frame_5, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack(pady=10)
 #========================= WINDOW METODO FALSA POSICIOM ========================================= FIN
 
 #========================= WINDOW METODO NEWTON-RAPHSON ========================================= INI
