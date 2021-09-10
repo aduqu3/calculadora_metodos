@@ -106,6 +106,7 @@ def bisection(f,a,b,N):
           b_n = b_n
       elif f_m_n == 0:
           print("Found exact solution.")
+          print(m_n)
           return m_n
       else:
           print("Bisection method fails.")

@@ -369,12 +369,17 @@ def window_trapecios():
 def window_biseccion():
     global window_3
    
+    window_3 = tk.Toplevel(root)
+    frame_3 = scroll_bar(window_3)
+    window_3.geometry("500x500")
+    window_3.title("Biseccion")
+
     def press(func_d, a_d, b_d, n_d,):
         func = func_d.get()
         a = a_d.get()
         b = b_d.get()
         n = n_d.get()
-        
+
         if( len(func) and len(a) and len(b) and len(n)):
             # print("vamos a hacer algo")
             a = int(a)
@@ -385,18 +390,16 @@ def window_biseccion():
             # la funcion ingresada con anterioridad
            
             # btn graficar ecuacion
-            btn_graph = ttk.Button(window_3, text="Graficar", command=lambda: graph(func, n, a, b))
-            btn_graph.pack()
+            btn_graph = ttk.Button(frame_3, text="Graficar", command=lambda: graph(func, n, a, b))
+            btn_graph.pack(pady=10)
 
-            # luego llamar metodo simpson 1/3
-            # y mostrar el resultado en la ventana
-            result_lbl = tk.Label(window_3, text=('Resultado Biseccion: ',bisection(func, a, b, n)))
-            result_lbl.pack(fill = BOTH)
+            result_lbl = tk.Label(frame_3, text=('Resultado Biseccion: ',bisection(func, a, b, n)), font=("Helvetica", 14))
+            result_lbl.pack(fill = BOTH, pady=10)
 
             # btn para limpiar la interfaz luego de realizar un calculo
             var = tk.IntVar()
-            btn_clean = ttk.Button(window_3, text="Limipiar", command=lambda: var.set(1))
-            btn_clean.pack()
+            btn_clean = ttk.Button(frame_3, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack(pady=10)
             # btn_clean.place(relx=.5, rely=.5, anchor="c")
 
             # print("waiting...")
@@ -408,7 +411,7 @@ def window_biseccion():
             result_lbl.destroy()
             btn_clean.destroy()
             # btn_clean.destroy()
-            # window_1.destroy()
+            # frame_3.destroy()
             func = ''
             n = ''
             a = ''
@@ -420,61 +423,73 @@ def window_biseccion():
         else:
             print("vacio: por favor ingrese todos los campos")
             
+    title_lbl = tk.Label(frame_3, text="Biseccion\n",
+    font=("Helvetica", 14), justify="left")
+    title_lbl.pack(fill = BOTH)
 
-    window_3 = tk.Toplevel(root)
-    window_3.geometry("800x400")
-    window_3.title("Biseccion")
-    
-    lbl = tk.Label(window_3, text="El metodo de Biseccion...")
+    lbl = tk.Label(frame_3, text="El método de bisección es uno de los más versátiles para determinar una raíz real\nen un intervalo de una ecuación dada, es fácil de comprender, aunque si se desea una mayor\nexactitud el número de cálculos que hay que realizar aumenta considerablemente.\n\nUna de sus ventajas es que funciona para ecuaciones algebraicas y trascendentes,\npero se recomienda utilizarlo después de un análisis gráfico.\n\nEl Teorema de Bolzano establece las condiciones necesarias \npara la existencia de al menos un cero de una función continua.",
+    font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
+
+        
+    lbl2 = tk.Label(frame_3, text="Teorema de Bolzano\nSi f(x) es continua en el intervalo [a,b], con f(a)∙f(b)<0,\n entonces existe al menos un c∈]a,b[ tal que f(c)=0.\n\nEl método de bisección se basa en el Teorema de Bolzano, el cual afirma que si se\ntiene una función real y=f(x) continua en el intervalo ]a,b[ donde el signo \nde la función en el extremo a es distinto al signo de la función en el extremo b del intervalo, \nentonces existe al menos un c∈]a,b[ tal que f(c)=0, que es la raíz buscada.",
+    font=("Helvetica", 11), justify="left")
+    lbl2.pack(fill=BOTH, pady=10)
+
+
+    img = add_img("assets/biseccion/0.png", frame_3, 10)
+
+    lbl4 = tk.Label(frame_3, text="Probar metodo:", font=("Helvetica", 11), justify="left")
+    lbl4.pack(fill = BOTH, pady=10)
+
 
     # func
     # colocar label para el input
-    func_lbl = ttk.Label(window_3, text = "funcion:")
+    func_lbl = ttk.Label(frame_3, text = "funcion: ", font=("Helvetica", 11), justify="left")
     func_lbl.pack()
     # se crea un entry, para el ingreso de texto desde teclado
     # luego guardamos esa informacion dentro de un StringVar tk_string
     func_str = tk.StringVar()
-    func_inp = ttk.Entry(window_3, textvariable=func_str)
+    func_inp = ttk.Entry(frame_3, textvariable=func_str)
     func_inp.configure(background="white")
     func_inp.focus()
-    func_inp.pack()
+    func_inp.pack(pady=10)
     
     # a
-    a_lbl = ttk.Label(window_3, text = "a:")
+    a_lbl = ttk.Label(frame_3, text = "a:", font=("Helvetica", 11))
     a_lbl.pack()
     
     a_str = tk.StringVar()
-    a_inp = ttk.Entry(window_3, textvariable=a_str)
+    a_inp = ttk.Entry(frame_3, textvariable=a_str)
     a_inp.configure(background="white")
     a_inp.focus()
-    a_inp.pack()
+    a_inp.pack(pady=10)
     # 
 
     # b
-    b_lbl = ttk.Label(window_3, text = "b:")
-    b_lbl.pack()
+    b_lbl = ttk.Label(frame_3, text = "b:", font=("Helvetica", 11))
+    b_lbl.pack(pady=10)
     
     b_str = tk.StringVar()
-    b_inp = ttk.Entry(window_3, textvariable=b_str)
+    b_inp = ttk.Entry(frame_3, textvariable=b_str)
     b_inp.configure(background="white")
     b_inp.focus()
-    b_inp.pack()
+    b_inp.pack(pady=10)
     # 
 
     # n
-    n_lbl = ttk.Label(window_3, text = "n:")
-    n_lbl.pack()
+    n_lbl = ttk.Label(frame_3, text = "n:", font=("Helvetica", 11))
+    n_lbl.pack(pady=10)
     
     n_str = tk.StringVar()
-    n_inp = ttk.Entry(window_3, textvariable=n_str)
+    n_inp = ttk.Entry(frame_3, textvariable=n_str)
     n_inp.configure(background="white")
     n_inp.focus()
-    n_inp.pack()
+    n_inp.pack(pady=10)
     # 
-    
-    submit_btn = ttk.Button(window_3, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
-    submit_btn.pack()
+        
+    submit_btn = ttk.Button(frame_3, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack(pady=10)
 #========================= WINDOW METODO BISECCION ========================================= FIN
 
 #========================= WINDOW METODO SIMPSON 3/8 ========================================= INI
