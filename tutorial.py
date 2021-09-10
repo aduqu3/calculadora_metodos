@@ -246,22 +246,11 @@ def window_trapecios():
     window_2.title("Trapecios")
 
     def press(func_d, a_d, b_d, n_d,):
-        # print(str.get())
         func = func_d.get()
         a = a_d.get()
         b = b_d.get()
         n = n_d.get()
 
-        # print(func)
-        # print(n)
-        # print(a)
-        # print(b)
-        # print("imprimir len")
-        # print(len(func))
-        # print(len(n))
-        # print(len(a))
-        # print(len(b))
-        
         if( len(func) and len(a) and len(b) and len(n)):
             # print("vamos a hacer algo")
             a = int(a)
@@ -275,8 +264,6 @@ def window_trapecios():
             btn_graph = ttk.Button(frame_2, text="Graficar", command=lambda: graph(func, n, a, b))
             btn_graph.pack(pady=10)
 
-            # luego llamar metodo simpson 1/3
-            # y mostrar el resultado en la ventana
             result_lbl = tk.Label(frame_2, text=('Resultado Trapecios: ',trapecios(func, a, b, n)), font=("Helvetica", 14))
             result_lbl.pack(fill = BOTH, pady=10)
 
@@ -309,23 +296,18 @@ def window_trapecios():
             
 
     # frame_2.resizable(False, False)
-    lbl = tk.Label(frame_2, text="La regla de Simpson es un método de integración numérica.\nEn otras palabras, es la aproximación numérica de integrales definidas.\nLa regla de Simpson es la siguiente:\n\nEn ella:\nf(x) es llamado el integrand\na = es el límite inferior de integración\nb = es el límite superior de integración\n",
+    lbl = tk.Label(frame_2, text="En análisis numérico la regla del trapecio es un método de integración, es decir,\nun método para calcular aproximadamente el valor de una integral definida.\nLa regla se basa en aproximar el valor de la integral de f(x) porel de la función lineal,\n que pasa a través de los puntos (a,f(a)) y (b,f(b)).\nLa integral de ésta es igual al área del trapecio bajo la gráfica de la función lineal.\n",
     font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
 
-    img = add_img("assets/simpson_13/1.png", frame_2, 10, 2, 2)
+    img = add_img("assets/trapecios/0.png", frame_2, 10, 2, 2)
 
     
-    lbl2 = tk.Label(frame_2, text="Como se muestra en el diagrama anterior, el integrando f(x) es aproximado\npor un polinomiode segundo orden, el interpolante cuadrático es P(x).\nsigue la aproximación:\n",
+    lbl2 = tk.Label(frame_2, text="Regla de trapecio simple:\nPara realizar la aproximación por esta regla es necesario usar un polinomio de primer orden,\n y esta es representada por:\n",
     font=("Helvetica", 11), justify="left")
     lbl2.pack(fill=BOTH, pady=10)
 
-    img2 = add_img("assets/simpson_13/2.png", frame_2, 10)
-
-    lbl3 = tk.Label(frame_2, text="Reemplazando (b-a)/2 como h, obtenemos", font=("Helvetica", 11), justify="left")
-    lbl3.pack(fill = BOTH, pady=10)
-    
-    img3 = add_img("assets/simpson_13/3.png", frame_2, 10)
+    img2 = add_img("assets/trapecios/1.png", frame_2, 10)
 
     lbl4 = tk.Label(frame_2, text="Probar metodo:", font=("Helvetica", 11), justify="left")
     lbl4.pack(fill = BOTH, pady=10)
