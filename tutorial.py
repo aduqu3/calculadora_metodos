@@ -8,6 +8,8 @@ from metodos.funciones import *
 # 
 import tkinter as tk
 import tkinter.ttk as ttk
+from tkinter import *
+
 from tkinter.constants import BOTH
 
 
@@ -20,19 +22,18 @@ root = tk.Tk()
 
 # =======convierte un string a una funcion======================================
 # there should be a better way using regex
-replacements = {
-    'sin' : 'np.sin',
-    'cos' : 'np.cos',
-    'exp': 'np.exp',
-    '^': '**',
-    'pi': 'np.pi'
-}
 
-# sin(2*pi*x)+x^2
-# sin(2*np.pi*x)+x**2
 
 def string2func(string):
     ''' evalua el string y retorna una funcion de x '''
+    replacements = {
+        'sin' : 'np.sin',
+        'cos' : 'np.cos',
+        'exp': 'np.exp',
+        '^': '**',
+        'pi': 'np.pi'
+    }
+
     for old, new in replacements.items():
         string = string.replace(old, new)
     # print(string)
@@ -44,12 +45,7 @@ def string2func(string):
     return func
 
 # =============grafica una funcion dada INI ========================================
-def graph(f, n, a, b):
-    # t = np.arange(0, 3, .01)
-    # ln(x) + sin(3x) + e^4
-    # plt.plot(t, 2 * np.sin(2 * np.pi * t))
-    # x = np.linspace(0, 3, .01)
-    
+def graph(f, n, a, b):   
     x = np.linspace(a, b, n)
     # x = np.linspace(a, b)
     func = string2func(f)
@@ -181,7 +177,6 @@ def window_simpson_13():
     submit_btn = ttk.Button(window_1, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
     submit_btn.pack()
 #========================= WINDOW metodo de simpson 1/3 ========================================= FIN
-
 
 #========================= WINDOW METODO TRAPECIOS ========================================= INI
 def window_trapecios():
@@ -984,9 +979,6 @@ def window_about_us():
 
 
 #============================================= WINDOW GENERAL ========================================= INI
-#
-# assets of main window
-#
 
 # btn para ventana simpson 1/3
 btn0 = tk.Button(root, text="Simpson 1/3", command=window_simpson_13)
@@ -1033,6 +1025,9 @@ root.geometry("500x500")
 root.title("Calculadora Metodos Numericos")
 # # root.iconbitmap('c:/gui/codemy.ico')
 # root.geometry('400x200')
+scrollbar = Scrollbar(root)
+scrollbar.pack( side = RIGHT, fill=Y )
+
 #
 root.mainloop()
 #============================================= WINDOW GENERAL ========================================= FIN
