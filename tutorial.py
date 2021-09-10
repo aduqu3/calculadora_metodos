@@ -774,12 +774,17 @@ def window_falsa_posicion():
 def window_newton_raphson():
     global window_6
    
+    window_6 = tk.Toplevel(root)
+    frame_6 = scroll_bar(window_6)
+    window_6.geometry("500x500")
+    window_6.title("Newton Rapshon")
+
     def press(func_d, a_d, b_d, n_d,):
         func = func_d.get()
         a = a_d.get()
         b = b_d.get()
         n = n_d.get()
-        
+
         if( len(func) and len(a) and len(b) and len(n)):
             # print("vamos a hacer algo")
             b = int(b)
@@ -789,19 +794,16 @@ def window_newton_raphson():
             # la funcion ingresada con anterioridad
            
             # btn graficar ecuacion
-            btn_graph = ttk.Button(window_6, text="Graficar", command=lambda: graph(func, 100, b, 20))
-            btn_graph.pack()
+            btn_graph = ttk.Button(frame_6, text="Graficar", command=lambda: graph(func, 100, b, 20))
+            btn_graph.pack(pady=10)
 
-            # luego llamar metodo simpson 1/3
-            # y mostrar el resultado en la ventana
-            # func=f, a=df, b=x0, n=tolerancia
-            result_lbl = tk.Label(window_6, text=('Resultado Newton Raphson: ',newton_raphson(func, a, b, n)))
-            result_lbl.pack(fill = BOTH)
+            result_lbl = tk.Label(frame_6, text=('Resultado Newton Rapshon: ', newton_raphson(func, a, b, n)), font=("Helvetica", 14))
+            result_lbl.pack(fill = BOTH, pady=10)
 
             # btn para limpiar la interfaz luego de realizar un calculo
             var = tk.IntVar()
-            btn_clean = ttk.Button(window_6, text="Limipiar", command=lambda: var.set(1))
-            btn_clean.pack()
+            btn_clean = ttk.Button(frame_6, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack(pady=10)
             # btn_clean.place(relx=.5, rely=.5, anchor="c")
 
             # print("waiting...")
@@ -813,7 +815,7 @@ def window_newton_raphson():
             result_lbl.destroy()
             btn_clean.destroy()
             # btn_clean.destroy()
-            # window_1.destroy()
+            # frame_6.destroy()
             func = ''
             n = ''
             a = ''
@@ -825,61 +827,76 @@ def window_newton_raphson():
         else:
             print("vacio: por favor ingrese todos los campos")
             
+    title_lbl = tk.Label(frame_6, text="Newton Rapshon\n",
+    font=("Helvetica", 14), justify="left")
+    title_lbl.pack(fill = BOTH)
 
-    window_6 = tk.Toplevel(root)
-    window_6.geometry("800x400")
-    window_6.title("Newton Rapshon")
-    
-    lbl = tk.Label(window_6, text="El metodo de Newton Raphson...")
+    lbl = tk.Label(frame_6, text="El método de Newton-Rhapson es uno de los más utilizados para dar solución a \necuaciones algebraicas y trascendentes. Clasificándose entre los métodos abiertos, es decir, \naquellos que requieren uno o dos valores que no necesariamente encierren a la raíz.\n\n El método de Newton-Raphson se deduce a partir de esta interpretación geométrica y \nse tiene que la primera derivada en x es equivalente a la pendiente:",
+    font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
+
+    img = add_img("assets/newton_raphson/1.png", frame_6, 10)
+
+    lbl2 = tk.Label(frame_6, text="Que se arregla para obtener", font=("Helvetica", 11), justify="left")
+    lbl2.pack(fill=BOTH, pady=10)
+
+    img2 = add_img("assets/newton_raphson/2.png", frame_6, 10)
+
+    lbl3 = tk.Label(frame_6, text="Mientras que el error aproximado porcentual lo calcularemos con la siguiente fórmula:", font=("Helvetica", 11), justify="left")
+    lbl3.pack(fill=BOTH, pady=10)
+
+    img3 = add_img("assets/newton_raphson/1.png", frame_6, 10)
+    
+    test_lbl = tk.Label(frame_6, text="Probar metodo:", font=("Helvetica", 11), justify="left")
+    test_lbl.pack(fill = BOTH, pady=10)
 
     # func
     # colocar label para el input
-    func_lbl = ttk.Label(window_6, text = "f:")
+    func_lbl = ttk.Label(frame_6, text = "f:", font=("Helvetica", 11), justify="left")
     func_lbl.pack()
     # se crea un entry, para el ingreso de texto desde teclado
     # luego guardamos esa informacion dentro de un StringVar tk_string
     func_str = tk.StringVar()
-    func_inp = ttk.Entry(window_6, textvariable=func_str)
+    func_inp = ttk.Entry(frame_6, textvariable=func_str)
     func_inp.configure(background="white")
     func_inp.focus()
-    func_inp.pack()
+    func_inp.pack(pady=10)
     
     # a
-    a_lbl = ttk.Label(window_6, text = "f':")
+    a_lbl = ttk.Label(frame_6, text = "f':", font=("Helvetica", 11))
     a_lbl.pack()
     
     a_str = tk.StringVar()
-    a_inp = ttk.Entry(window_6, textvariable=a_str)
+    a_inp = ttk.Entry(frame_6, textvariable=a_str)
     a_inp.configure(background="white")
     a_inp.focus()
-    a_inp.pack()
+    a_inp.pack(pady=10)
     # 
 
     # b
-    b_lbl = ttk.Label(window_6, text = "x0:")
-    b_lbl.pack()
+    b_lbl = ttk.Label(frame_6, text = "x0:", font=("Helvetica", 11))
+    b_lbl.pack(pady=10)
     
     b_str = tk.StringVar()
-    b_inp = ttk.Entry(window_6, textvariable=b_str)
+    b_inp = ttk.Entry(frame_6, textvariable=b_str)
     b_inp.configure(background="white")
     b_inp.focus()
-    b_inp.pack()
+    b_inp.pack(pady=10)
     # 
 
     # n
-    n_lbl = ttk.Label(window_6, text = "tolerancia:")
-    n_lbl.pack()
+    n_lbl = ttk.Label(frame_6, text = "tolerancia:", font=("Helvetica", 11))
+    n_lbl.pack(pady=10)
     
     n_str = tk.StringVar()
-    n_inp = ttk.Entry(window_6, textvariable=n_str)
+    n_inp = ttk.Entry(frame_6, textvariable=n_str)
     n_inp.configure(background="white")
     n_inp.focus()
-    n_inp.pack()
+    n_inp.pack(pady=10)
     # 
-    
-    submit_btn = ttk.Button(window_6, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
-    submit_btn.pack()
+        
+    submit_btn = ttk.Button(frame_6, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack(pady=10)
 #========================= WINDOW METODO NEWTON-RAPHSON ========================================= FIN
 
 #========================= WINDOW METODO SECANTE ========================================= INI
