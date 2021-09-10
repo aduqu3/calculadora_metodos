@@ -66,7 +66,7 @@ def string2func(string):
 # =======convierte un string a una funcion======================================
 
 
-# =============grafica una funcion dada INI ========================================
+# ============= grafica una funcion dada INI ========================================
 def graph(f, n, a, b):   
     x = np.linspace(a, b, n)
     # x = np.linspace(a, b)
@@ -74,12 +74,16 @@ def graph(f, n, a, b):
     plt.plot(x, func(x))
     plt.xlim(a, b)
     plt.show()
-# =============grafica una funcion dada FIN ========================================
+# ============= grafica una funcion dada FIN ========================================
 
 #========================= WINDOW metodo de simpson 1/3 ========================================= INI
 def window_simpson_13():
     global window_1
    
+    window_1 = tk.Toplevel(root)
+    frame_1 = scroll_bar(window_1)
+    window_1.geometry("500x500")
+    window_1.title("Simpson 1/3")
 
     def press(func_d, a_d, b_d, n_d,):
         # print(str.get())
@@ -108,17 +112,17 @@ def window_simpson_13():
             # la funcion ingresada con anterioridad
            
             # btn graficar ecuacion
-            btn_graph = ttk.Button(window_1, text="Graficar", command=lambda: graph(func, n, a, b))
+            btn_graph = ttk.Button(frame_1, text="Graficar", command=lambda: graph(func, n, a, b))
             btn_graph.pack()
 
             # luego llamar metodo simpson 1/3
             # y mostrar el resultado en la ventana
-            result_lbl = tk.Label(window_1, text=('Resultado Simpson 1/3: ',simpson_13(a, b, n, func)))
+            result_lbl = tk.Label(frame_1, text=('Resultado Simpson 1/3: ',simpson_13(a, b, n, func)))
             result_lbl.pack(fill = BOTH)
 
             # btn para limpiar la interfaz luego de realizar un calculo
             var = tk.IntVar()
-            btn_clean = ttk.Button(window_1, text="Limipiar", command=lambda: var.set(1))
+            btn_clean = ttk.Button(frame_1, text="Limipiar", command=lambda: var.set(1))
             btn_clean.pack()
             # btn_clean.place(relx=.5, rely=.5, anchor="c")
 
@@ -131,7 +135,7 @@ def window_simpson_13():
             result_lbl.destroy()
             btn_clean.destroy()
             # btn_clean.destroy()
-            # window_1.destroy()
+            # frame_1.destroy()
             func = ''
             n = ''
             a = ''
@@ -144,59 +148,59 @@ def window_simpson_13():
             print("vacio: por favor ingrese todos los campos")
             
 
-    window_1 = tk.Toplevel(root)
-    window_1.geometry("800x400")
-    window_1.title("Simpson 1/3")
-    # window_1.resizable(False, False)
-    lbl = tk.Label(window_1, text="El metodo de simpson 1/3...")
+    # frame_1.resizable(False, False)
+    lbl = tk.Label(frame_1, text="La regla de Simpson es un método de integración numérica. En otras palabras, \nes la aproximación numérica de integrales definidas.La regla de Simpson es la siguiente:	")
     lbl.pack(fill = BOTH)
 
     # func
     # colocar label para el input
-    func_lbl = ttk.Label(window_1, text = "funcion:")
+    func_lbl = ttk.Label(frame_1, text = "funcion:")
     func_lbl.pack()
     # se crea un entry, para el ingreso de texto desde teclado
     # luego guardamos esa informacion dentro de un StringVar tk_string
     func_str = tk.StringVar()
-    func_inp = ttk.Entry(window_1, textvariable=func_str)
+    func_inp = ttk.Entry(frame_1, textvariable=func_str)
     func_inp.configure(background="white")
     func_inp.focus()
     func_inp.pack()
     
     # a
-    a_lbl = ttk.Label(window_1, text = "a:")
+    a_lbl = ttk.Label(frame_1, text = "a:")
     a_lbl.pack()
     
     a_str = tk.StringVar()
-    a_inp = ttk.Entry(window_1, textvariable=a_str)
+    a_inp = ttk.Entry(frame_1, textvariable=a_str)
     a_inp.configure(background="white")
     a_inp.focus()
     a_inp.pack()
     # 
 
     # b
-    b_lbl = ttk.Label(window_1, text = "b:")
+    b_lbl = ttk.Label(frame_1, text = "b:")
     b_lbl.pack()
     
     b_str = tk.StringVar()
-    b_inp = ttk.Entry(window_1, textvariable=b_str)
+    b_inp = ttk.Entry(frame_1, textvariable=b_str)
     b_inp.configure(background="white")
     b_inp.focus()
     b_inp.pack()
     # 
 
     # n
-    n_lbl = ttk.Label(window_1, text = "n:")
+    n_lbl = ttk.Label(frame_1, text = "n:")
     n_lbl.pack()
     
     n_str = tk.StringVar()
-    n_inp = ttk.Entry(window_1, textvariable=n_str)
+    n_inp = ttk.Entry(frame_1, textvariable=n_str)
     n_inp.configure(background="white")
     n_inp.focus()
     n_inp.pack()
     # 
     
-    submit_btn = ttk.Button(window_1, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    for thing in range(100):
+	    Button(frame_1, text=f'Button {thing} Yo!').pack(side=tk.TOP, padx=5, pady=5)
+    
+    submit_btn = ttk.Button(frame_1, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
     submit_btn.pack()
 #========================= WINDOW metodo de simpson 1/3 ========================================= FIN
 
