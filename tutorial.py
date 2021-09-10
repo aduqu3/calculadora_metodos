@@ -1,4 +1,6 @@
+from os import path
 import sys
+from tkinter import font
 # from math import *
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,7 +14,8 @@ from tkinter import *
 from tkinter.constants import BOTH
 # 
 # colocar iconos o imagenes en ventanas
-# from PIL import ImageTk,ImageTk
+from PIL import ImageTk,ImageTk, Image
+
 
 root = tk.Tk()
 # size de la ventana
@@ -149,12 +152,44 @@ def window_simpson_13():
             
 
     # frame_1.resizable(False, False)
-    lbl = tk.Label(frame_1, text="La regla de Simpson es un método de integración numérica. En otras palabras, \nes la aproximación numérica de integrales definidas.La regla de Simpson es la siguiente:	")
+    lbl = tk.Label(frame_1, text="La regla de Simpson es un método de integración numérica.\nEn otras palabras, es la aproximación numérica de integrales definidas.\nLa regla de Simpson es la siguiente:\n\nEn ella:\nf(x) es llamado el integrand\na = es el límite inferior de integración\nb = es el límite superior de integración\n",
+    font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
+
+    # add image
+    def add_img(path, y):
+        img = PhotoImage(file=path)
+        img_lbl =  ttk.Label(frame_1, image=img)
+        img_lbl.image = img
+        img_lbl.pack(pady=y)
+        return img_lbl
+    
+    # img = add_img("C:/WSL/projectsU/project_metodos/assets/simpson_13/3.png", 10)
+    img = add_img("assets/simpson_13/3.png", 10)
+    # img_text.image_create(END, image=image_1)
+    # img_text.pack()
+
+    # img = ImageTk.PhotoImage(Image.open("C:/WSL/projectsU/project_metodos/assets/simpson_13/3.png"))
+    # imglabel = Label(frame_1, image=img)
+    # imglabel,image = img
+    # imglabel.pack()
+
+    # image = tk.PhotoImage(file="C:/WSL/projectsU/project_metodos/assets/simpson_13/2.png")
+    # label = tk.Label(frame_1, image=image)
+    # label.pack()
+
+    # image1 = Image.open("C:/WSL/projectsU/project_metodos/assets/simpson_13/3.png")
+    # test = ImageTk.PhotoImage(image1)
+
+    # label1 = ttk.Label(frame_1, image=test)
+    # label1.image = test
+
+    # # Position image
+    # label1.pack()
 
     # func
     # colocar label para el input
-    func_lbl = ttk.Label(frame_1, text = "funcion:")
+    func_lbl = ttk.Label(frame_1, text = "funcion: ", font=("Helvetica", 11), justify="left")
     func_lbl.pack()
     # se crea un entry, para el ingreso de texto desde teclado
     # luego guardamos esa informacion dentro de un StringVar tk_string
@@ -197,8 +232,8 @@ def window_simpson_13():
     n_inp.pack()
     # 
     
-    for thing in range(100):
-	    Button(frame_1, text=f'Button {thing} Yo!').pack(side=tk.TOP, padx=5, pady=5)
+    # for thing in range(100):
+	#     Button(frame_1, text=f'Button {thing} Yo!').pack(side=tk.TOP, padx=5, pady=5)
     
     submit_btn = ttk.Button(frame_1, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
     submit_btn.pack()
@@ -1011,7 +1046,7 @@ main_window = scroll_bar(root)
 
 # btn para ventana simpson 1/3
 btn0 = tk.Button(main_window, text="Simpson 1/3", command=window_simpson_13)
-btn0.pack(padx=5, pady=5)
+btn0.pack(fill = BOTH, pady=5)
 
 # btn para ventana trapecios
 btn1 = tk.Button(main_window, text="Trapecios", command=window_trapecios)
