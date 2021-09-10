@@ -160,6 +160,9 @@ def window_simpson_13():
         else:
             print("vacio: por favor ingrese todos los campos")
             
+    title_lbl = tk.Label(frame_1, text="Regla de Simpson 1/3\n",
+    font=("Helvetica", 14), justify="left")
+    title_lbl.pack(fill = BOTH)
 
     # frame_1.resizable(False, False)
     lbl = tk.Label(frame_1, text="La regla de Simpson es un método de integración numérica.\nEn otras palabras, es la aproximación numérica de integrales definidas.\nLa regla de Simpson es la siguiente:\n\nEn ella:\nf(x) es llamado el integrand\na = es el límite inferior de integración\nb = es el límite superior de integración\n",
@@ -295,7 +298,10 @@ def window_trapecios():
             print("vacio: por favor ingrese todos los campos")
             
 
-    # frame_2.resizable(False, False)
+    title_lbl = tk.Label(frame_2, text="Regla de Trapecios\n",
+    font=("Helvetica", 14), justify="left")
+    title_lbl.pack(fill = BOTH)
+
     lbl = tk.Label(frame_2, text="En análisis numérico la regla del trapecio es un método de integración, es decir,\nun método para calcular aproximadamente el valor de una integral definida.\nLa regla se basa en aproximar el valor de la integral de f(x) porel de la función lineal,\n que pasa a través de los puntos (a,f(a)) y (b,f(b)).\nLa integral de ésta es igual al área del trapecio bajo la gráfica de la función lineal.\n",
     font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
@@ -496,12 +502,17 @@ def window_biseccion():
 def window_simpson_38():
     global window_4
    
+    window_4 = tk.Toplevel(root)
+    frame_4 = scroll_bar(window_4)
+    window_4.geometry("500x500")
+    window_4.title("Simpson 3/8")
+
     def press(func_d, a_d, b_d, n_d,):
         func = func_d.get()
         a = a_d.get()
         b = b_d.get()
         n = n_d.get()
-        
+
         if( len(func) and len(a) and len(b) and len(n)):
             # print("vamos a hacer algo")
             a = int(a)
@@ -512,18 +523,16 @@ def window_simpson_38():
             # la funcion ingresada con anterioridad
            
             # btn graficar ecuacion
-            btn_graph = ttk.Button(window_4, text="Graficar", command=lambda: graph(func, n, a, b))
-            btn_graph.pack()
+            btn_graph = ttk.Button(frame_4, text="Graficar", command=lambda: graph(func, n, a, b))
+            btn_graph.pack(pady=10)
 
-            # luego llamar metodo simpson 1/3
-            # y mostrar el resultado en la ventana
-            result_lbl = tk.Label(window_4, text=('Resultado Simpson 3/8: ',simpson_38(func, a, b, n)))
-            result_lbl.pack(fill = BOTH)
+            result_lbl = tk.Label(frame_4, text=('Resultado Simpson 3/8: ', simpson_38(func, a, b, n)), font=("Helvetica", 14))
+            result_lbl.pack(fill = BOTH, pady=10)
 
             # btn para limpiar la interfaz luego de realizar un calculo
             var = tk.IntVar()
-            btn_clean = ttk.Button(window_4, text="Limipiar", command=lambda: var.set(1))
-            btn_clean.pack()
+            btn_clean = ttk.Button(frame_4, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack(pady=10)
             # btn_clean.place(relx=.5, rely=.5, anchor="c")
 
             # print("waiting...")
@@ -535,7 +544,7 @@ def window_simpson_38():
             result_lbl.destroy()
             btn_clean.destroy()
             # btn_clean.destroy()
-            # window_1.destroy()
+            # frame_4.destroy()
             func = ''
             n = ''
             a = ''
@@ -547,61 +556,91 @@ def window_simpson_38():
         else:
             print("vacio: por favor ingrese todos los campos")
             
+    title_lbl = tk.Label(frame_4, text="Regla de Simpson 3/8\n",
+    font=("Helvetica", 14), justify="left")
+    title_lbl.pack(fill = BOTH)
 
-    window_4 = tk.Toplevel(root)
-    window_4.geometry("800x400")
-    window_4.title("Simpson 3/8")
-    
-    lbl = tk.Label(window_4, text="El metodo de Simpson 3/8...")
+    lbl = tk.Label(frame_4, text="La regla de 3/8 de Simpson es similar a la regla de 1/3 de Simpson, con la única diferencia\n de que, para la regla de 3/8, el interpolante es un polinomio cúbico.\n Aunque la regla de 3/8 utiliza un valor de función más, es aproximadamente \ndos veces más precisa que la regla de 1/3.\n",
+    font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
+
+    img = add_img("assets/simpson_38/0.png", frame_4, 10)
+
+        
+    lbl2 = tk.Label(frame_4, text="La regla de 3/8 de Simpson establece:",
+    font=("Helvetica", 11), justify="left")
+    lbl2.pack(fill=BOTH, pady=10)
+
+
+    img1 = add_img("assets/simpson_38/1.png", frame_4, 10)
+    
+    lbl3 = tk.Label(frame_4, text="Reemplazando (b-a)/3 como h, obtenemos,",
+    font=("Helvetica", 11), justify="left")
+    lbl3.pack(fill=BOTH, pady=10)
+
+    img2 = add_img("assets/simpson_38/2.png", frame_4, 10)
+
+    lbl4 = tk.Label(frame_4, text="La regla de 3/8 de Simpson para n intervalos (n debería ser un múltiplo de 3):",
+    font=("Helvetica", 11), justify="left")
+    lbl4.pack(fill=BOTH, pady=10)
+
+    img3 = add_img("assets/simpson_38/3.png", frame_4, 10)
+
+    lbl5 = tk.Label(frame_4, text="donde xj = a+jh para j = 0,1,…,n-1,n con h=(b-a)/n; en particular, x0 = a y xn = b.",
+    font=("Helvetica", 11), justify="left")
+    lbl5.pack(fill=BOTH, pady=10)
+
+    lbl6 = tk.Label(frame_4, text="Probar metodo:", font=("Helvetica", 11), justify="left")
+    lbl6.pack(fill = BOTH, pady=10)
+
 
     # func
     # colocar label para el input
-    func_lbl = ttk.Label(window_4, text = "funcion:")
+    func_lbl = ttk.Label(frame_4, text = "funcion: ", font=("Helvetica", 11), justify="left")
     func_lbl.pack()
     # se crea un entry, para el ingreso de texto desde teclado
     # luego guardamos esa informacion dentro de un StringVar tk_string
     func_str = tk.StringVar()
-    func_inp = ttk.Entry(window_4, textvariable=func_str)
+    func_inp = ttk.Entry(frame_4, textvariable=func_str)
     func_inp.configure(background="white")
     func_inp.focus()
-    func_inp.pack()
+    func_inp.pack(pady=10)
     
     # a
-    a_lbl = ttk.Label(window_4, text = "a:")
+    a_lbl = ttk.Label(frame_4, text = "a:", font=("Helvetica", 11))
     a_lbl.pack()
     
     a_str = tk.StringVar()
-    a_inp = ttk.Entry(window_4, textvariable=a_str)
+    a_inp = ttk.Entry(frame_4, textvariable=a_str)
     a_inp.configure(background="white")
     a_inp.focus()
-    a_inp.pack()
+    a_inp.pack(pady=10)
     # 
 
     # b
-    b_lbl = ttk.Label(window_4, text = "b:")
-    b_lbl.pack()
+    b_lbl = ttk.Label(frame_4, text = "b:", font=("Helvetica", 11))
+    b_lbl.pack(pady=10)
     
     b_str = tk.StringVar()
-    b_inp = ttk.Entry(window_4, textvariable=b_str)
+    b_inp = ttk.Entry(frame_4, textvariable=b_str)
     b_inp.configure(background="white")
     b_inp.focus()
-    b_inp.pack()
+    b_inp.pack(pady=10)
     # 
 
     # n
-    n_lbl = ttk.Label(window_4, text = "n:")
-    n_lbl.pack()
+    n_lbl = ttk.Label(frame_4, text = "n:", font=("Helvetica", 11))
+    n_lbl.pack(pady=10)
     
     n_str = tk.StringVar()
-    n_inp = ttk.Entry(window_4, textvariable=n_str)
+    n_inp = ttk.Entry(frame_4, textvariable=n_str)
     n_inp.configure(background="white")
     n_inp.focus()
-    n_inp.pack()
+    n_inp.pack(pady=10)
     # 
-    
-    submit_btn = ttk.Button(window_4, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
-    submit_btn.pack()
+        
+    submit_btn = ttk.Button(frame_4, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack(pady=10)
 #========================= WINDOW METODO SIMPSON 3/8 ========================================= FIN
 
 #========================= WINDOW METODO FALSA POSICIOM ========================================= INI
@@ -1065,7 +1104,6 @@ def window_about_us():
 
 
 #============================================= WINDOW GENERAL ========================================= INI
-
 # create scroll bar for main window
 main_window = scroll_bar(root)
 
