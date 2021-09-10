@@ -71,8 +71,8 @@ def string2func(string):
 
 # ============= grafica una funcion dada INI ========================================
 def graph(f, n, a, b):   
-    x = np.linspace(a, b, n)
-    # x = np.linspace(a, b)
+    # x = np.linspace(a, b, n)
+    x = np.linspace(a, b)
     func = string2func(f)
     plt.plot(x, func(x))
     plt.xlim(a, b)
@@ -240,11 +240,27 @@ def window_simpson_13():
 def window_trapecios():
     global window_2
    
+    window_2 = tk.Toplevel(root)
+    frame_2 = scroll_bar(window_2)
+    window_2.geometry("500x500")
+    window_2.title("Trapecios")
+
     def press(func_d, a_d, b_d, n_d,):
+        # print(str.get())
         func = func_d.get()
         a = a_d.get()
         b = b_d.get()
         n = n_d.get()
+
+        # print(func)
+        # print(n)
+        # print(a)
+        # print(b)
+        # print("imprimir len")
+        # print(len(func))
+        # print(len(n))
+        # print(len(a))
+        # print(len(b))
         
         if( len(func) and len(a) and len(b) and len(n)):
             # print("vamos a hacer algo")
@@ -256,18 +272,18 @@ def window_trapecios():
             # la funcion ingresada con anterioridad
            
             # btn graficar ecuacion
-            btn_graph = ttk.Button(window_2, text="Graficar", command=lambda: graph(func, n, a, b))
-            btn_graph.pack()
+            btn_graph = ttk.Button(frame_2, text="Graficar", command=lambda: graph(func, n, a, b))
+            btn_graph.pack(pady=10)
 
             # luego llamar metodo simpson 1/3
             # y mostrar el resultado en la ventana
-            result_lbl = tk.Label(window_2, text=('Resultado Trapecios: ', trapecios(func, a, b, n)))
-            result_lbl.pack(fill = BOTH)
+            result_lbl = tk.Label(frame_2, text=('Resultado Trapecios: ',trapecios(func, a, b, n)), font=("Helvetica", 14))
+            result_lbl.pack(fill = BOTH, pady=10)
 
             # btn para limpiar la interfaz luego de realizar un calculo
             var = tk.IntVar()
-            btn_clean = ttk.Button(window_2, text="Limipiar", command=lambda: var.set(1))
-            btn_clean.pack()
+            btn_clean = ttk.Button(frame_2, text="Limipiar", command=lambda: var.set(1))
+            btn_clean.pack(pady=10)
             # btn_clean.place(relx=.5, rely=.5, anchor="c")
 
             # print("waiting...")
@@ -279,7 +295,7 @@ def window_trapecios():
             result_lbl.destroy()
             btn_clean.destroy()
             # btn_clean.destroy()
-            # window_1.destroy()
+            # frame_2.destroy()
             func = ''
             n = ''
             a = ''
@@ -292,60 +308,79 @@ def window_trapecios():
             print("vacio: por favor ingrese todos los campos")
             
 
-    window_2 = tk.Toplevel(root)
-    window_2.geometry("800x400")
-    window_2.title("Trapecios")
-    
-    lbl = tk.Label(window_2, text="El metodo de trapecios...")
+    # frame_2.resizable(False, False)
+    lbl = tk.Label(frame_2, text="La regla de Simpson es un método de integración numérica.\nEn otras palabras, es la aproximación numérica de integrales definidas.\nLa regla de Simpson es la siguiente:\n\nEn ella:\nf(x) es llamado el integrand\na = es el límite inferior de integración\nb = es el límite superior de integración\n",
+    font=("Helvetica", 11), justify="left")
     lbl.pack(fill = BOTH)
+
+    img = add_img("assets/simpson_13/1.png", frame_2, 10, 2, 2)
+
+    
+    lbl2 = tk.Label(frame_2, text="Como se muestra en el diagrama anterior, el integrando f(x) es aproximado\npor un polinomiode segundo orden, el interpolante cuadrático es P(x).\nsigue la aproximación:\n",
+    font=("Helvetica", 11), justify="left")
+    lbl2.pack(fill=BOTH, pady=10)
+
+    img2 = add_img("assets/simpson_13/2.png", frame_2, 10)
+
+    lbl3 = tk.Label(frame_2, text="Reemplazando (b-a)/2 como h, obtenemos", font=("Helvetica", 11), justify="left")
+    lbl3.pack(fill = BOTH, pady=10)
+    
+    img3 = add_img("assets/simpson_13/3.png", frame_2, 10)
+
+    lbl4 = tk.Label(frame_2, text="Probar metodo:", font=("Helvetica", 11), justify="left")
+    lbl4.pack(fill = BOTH, pady=10)
+
 
     # func
     # colocar label para el input
-    func_lbl = ttk.Label(window_2, text = "funcion:")
+    func_lbl = ttk.Label(frame_2, text = "funcion: ", font=("Helvetica", 11), justify="left")
     func_lbl.pack()
     # se crea un entry, para el ingreso de texto desde teclado
     # luego guardamos esa informacion dentro de un StringVar tk_string
     func_str = tk.StringVar()
-    func_inp = ttk.Entry(window_2, textvariable=func_str)
+    func_inp = ttk.Entry(frame_2, textvariable=func_str)
     func_inp.configure(background="white")
     func_inp.focus()
-    func_inp.pack()
+    func_inp.pack(pady=10)
     
     # a
-    a_lbl = ttk.Label(window_2, text = "a:")
+    a_lbl = ttk.Label(frame_2, text = "a:", font=("Helvetica", 11))
     a_lbl.pack()
     
     a_str = tk.StringVar()
-    a_inp = ttk.Entry(window_2, textvariable=a_str)
+    a_inp = ttk.Entry(frame_2, textvariable=a_str)
     a_inp.configure(background="white")
     a_inp.focus()
-    a_inp.pack()
+    a_inp.pack(pady=10)
     # 
 
     # b
-    b_lbl = ttk.Label(window_2, text = "b:")
-    b_lbl.pack()
+    b_lbl = ttk.Label(frame_2, text = "b:", font=("Helvetica", 11))
+    b_lbl.pack(pady=10)
     
     b_str = tk.StringVar()
-    b_inp = ttk.Entry(window_2, textvariable=b_str)
+    b_inp = ttk.Entry(frame_2, textvariable=b_str)
     b_inp.configure(background="white")
     b_inp.focus()
-    b_inp.pack()
+    b_inp.pack(pady=10)
     # 
 
     # n
-    n_lbl = ttk.Label(window_2, text = "n:")
-    n_lbl.pack()
+    n_lbl = ttk.Label(frame_2, text = "n:", font=("Helvetica", 11))
+    n_lbl.pack(pady=10)
     
     n_str = tk.StringVar()
-    n_inp = ttk.Entry(window_2, textvariable=n_str)
+    n_inp = ttk.Entry(frame_2, textvariable=n_str)
     n_inp.configure(background="white")
     n_inp.focus()
-    n_inp.pack()
+    n_inp.pack(pady=10)
     # 
     
-    submit_btn = ttk.Button(window_2, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
-    submit_btn.pack()
+    # for thing in range(100):
+	#     Button(frame_2, text=f'Button {thing} Yo!').pack(side=tk.TOP, padx=5, pady=5)
+    
+    submit_btn = ttk.Button(frame_2, text = "calcular", command=lambda: press(func_str, a_str, b_str, n_str))
+    submit_btn.pack(pady=10)
 #========================= WINDOW METODO TRAPECIOS ========================================= FIN
 
 #========================= WINDOW METODO BISECCION ========================================= INI
