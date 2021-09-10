@@ -9,21 +9,41 @@ from metodos.funciones import *
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import *
-
 from tkinter.constants import BOTH
-
-
+# 
 # colocar iconos o imagenes en ventanas
 # from PIL import ImageTk,ImageTk
 
-# from math import pi,e,sin,cos,tan,log,log10,ceil,degrees,radians,exp,asin,acos,floor
-
 root = tk.Tk()
+# size de la ventana
+root.geometry("500x500")
+# configuracion de la ventana principal
+root.title("Calculadora Metodos Numericos")
+# # root.iconbitmap('c:/gui/codemy.ico')
+
+# ========================= SCROLL BAR INI ======================================
+def scroll_bar(window):
+    # Create A Main Frame
+    main_frame = Frame(window)
+    main_frame.pack(fill=BOTH, expand=1)
+    # Create A Canvas
+    my_canvas = Canvas(main_frame)
+    my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+    # Add A Scrollbar To The Canvas
+    my_scrollbar = ttk.Scrollbar(main_frame, orient=VERTICAL, command=my_canvas.yview)
+    my_scrollbar.pack(side=RIGHT, fill=Y)
+    # Configure The Canvas
+    my_canvas.configure(yscrollcommand=my_scrollbar.set)
+    my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion = my_canvas.bbox("all")))
+    # Create ANOTHER Frame INSIDE the Canvas
+    second_frame = Frame(my_canvas)
+    # Add that New frame To a Window In The Canvas
+    my_canvas.create_window((0,0), window=second_frame, anchor="nw")
+    # return the frame on the window you wanna use
+    return second_frame
+# ========================= SCROLL BAR FIN ======================================
 
 # =======convierte un string a una funcion======================================
-# there should be a better way using regex
-
-
 def string2func(string):
     ''' evalua el string y retorna una funcion de x '''
     replacements = {
@@ -43,6 +63,8 @@ def string2func(string):
         return eval(string)
 
     return func
+# =======convierte un string a una funcion======================================
+
 
 # =============grafica una funcion dada INI ========================================
 def graph(f, n, a, b):   
@@ -980,53 +1002,49 @@ def window_about_us():
 
 #============================================= WINDOW GENERAL ========================================= INI
 
+# create scroll bar for main window
+main_window = scroll_bar(root)
+
 # btn para ventana simpson 1/3
-btn0 = tk.Button(root, text="Simpson 1/3", command=window_simpson_13)
+btn0 = tk.Button(main_window, text="Simpson 1/3", command=window_simpson_13)
 btn0.pack(padx=5, pady=5)
 
 # btn para ventana trapecios
-btn1 = tk.Button(root, text="Trapecios", command=window_trapecios)
+btn1 = tk.Button(main_window, text="Trapecios", command=window_trapecios)
 btn1.pack(padx=5, pady=5)
 
 # btn para ventana 
-btn2 = tk.Button(root, text="Biseccion", command=window_biseccion)
+btn2 = tk.Button(main_window, text="Biseccion", command=window_biseccion)
 btn2.pack(padx=5, pady=5)
 
 # btn para ventana 
-btn3 = tk.Button(root, text="Simpson 3/8", command=window_simpson_38)
+btn3 = tk.Button(main_window, text="Simpson 3/8", command=window_simpson_38)
 btn3.pack(padx=5, pady=5)
 
 # btn para ventana falsa posicion
-btn4 = tk.Button(root, text="Falsa Posicion", command=window_falsa_posicion)
+btn4 = tk.Button(main_window, text="Falsa Posicion", command=window_falsa_posicion)
 btn4.pack(padx=5, pady=5)
 
 # btn para ventana falsa posicion
-btn5 = tk.Button(root, text="Newton Raphson", command=window_newton_raphson)
+btn5 = tk.Button(main_window, text="Newton Raphson", command=window_newton_raphson)
 btn5.pack(padx=5, pady=5)
 
-btn6 = tk.Button(root, text="Newton Raphson", command=window_newton_raphson)
+btn6 = tk.Button(main_window, text="Newton Raphson", command=window_newton_raphson)
 btn6.pack(padx=5, pady=5)
 
-btn7 = tk.Button(root, text="Punto Fijo", command=window_punto_fijo)
+btn7 = tk.Button(main_window, text="Punto Fijo", command=window_punto_fijo)
 btn7.pack(padx=5, pady=5)
 
 
 # btn para ventana acerca de nosotros
 btn_about_us = tk.Button(
-    root, text="Acerca de nosotros", command=window_about_us)
-btn_about_us.pack(padx=20, pady=20)
+    main_window, text="Acerca de nosotros", command=window_about_us)
+btn_about_us.pack(side=tk.BOTTOM, padx=20, pady=20)
 
-# btn1 = tk.Button(root, text="Simpson 1/3", command=openwindow)
-# btn1.pack(padx=20, pady=20)
+# for thing in range(100):
+# 	Button(main_window, text=f'Button {thing} Yo!').pack(side=tk.TOP, padx=150, pady=5)
+# my_label = Label(main_window, text="It's Friday Yo!").pack(side=tk.RIGHT, padx=150, pady=5)
 
-# size de la ventana
-root.geometry("500x500")
-# configuracion de la ventana principal
-root.title("Calculadora Metodos Numericos")
-# # root.iconbitmap('c:/gui/codemy.ico')
-# root.geometry('400x200')
-scrollbar = Scrollbar(root)
-scrollbar.pack( side = RIGHT, fill=Y )
 
 #
 root.mainloop()
