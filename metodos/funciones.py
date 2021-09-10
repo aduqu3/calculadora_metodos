@@ -2,9 +2,7 @@ import sys
 from math import *
 import numpy as np
 
-def hello():
-    print('hello world')
-    
+
 # ============================ REPLACE CHARACTERS ON STRING INI ===================
 # reemplazar simbolos en la cadena de caracteres para poderse utilizar en el metodo simpson 1/3
 def string_replace(string):
@@ -17,6 +15,7 @@ def string_replace(string):
 
     return string
 # ============================ REPLACE CHARACTERS ON STRING FIN ===================    
+
 
 # ============================ SIMPSON 1/3 INI ===================
 #SIMPSON 1/3
@@ -83,6 +82,7 @@ def trapecios(func, a, b, m):
     return result
 # ============================ TRAPECIOS FIN ===================
 
+
 # ============================ BISECCION  INI ===================
 def bisection(f,a,b,N):
   def fx(x,f):
@@ -114,6 +114,7 @@ def bisection(f,a,b,N):
   return (a_n + b_n)/2
 # ============================ BISECCION  FIN ===================
 
+
 # ============================ SIMPSON 3/8  INI ===================
 def simpson_38(f,x0,xf,n):
   def fx(x,f):
@@ -134,6 +135,7 @@ def simpson_38(f,x0,xf,n):
     r=(3.*h/8)*suma
   return r
 # ============================ SIMPSON 3/8  FIN ===================
+
 
 # ============================ FALSA POSICION INI ===================
 def falsa_posicion(f,a,b,tolera):
@@ -189,6 +191,7 @@ def newton_raphson(f,df,x0,tolera):
   return ("raiz",xi,"con error de", tramo)
 # ============================ NEWTON-RAPHSON FIN ===================
 
+
 # ================================ SECANTE INI =========================
 def secante(f, xa, tolera):
   # evaluar funcion en x
@@ -229,6 +232,7 @@ def secante(f, xa, tolera):
   return ("raiz en: ", raiz)
 # ================================ SECANTE FIN =========================
 
+
 # ================================ PUNTO FIJO INI =========================
 def punto_fijo(func,  approx, tol, n):
   def fx(x, f):
@@ -243,3 +247,16 @@ def punto_fijo(func,  approx, tol, n):
       approx = p
   return "Method failed after {} iterations".format(n)
 # ================================ PUNTO FIJO FIN =========================
+
+
+# ================================ TIPOS DE ERRORES INI =========================
+def error_verdadero(valor_verdadero,valor_aproximado):
+  return ("El error verdadero es : ",valor_verdadero-valor_aproximado )
+
+def error_relativo(valor_real,valor_aproximado):
+  valor_absoluto= valor_real-valor_aproximado
+  return ("El error relativo es : ",valor_absoluto/valor_real)
+
+def error_aproximado(aproxi_anterior,aproxi):
+  return ("El error de aproximación es : ",((aproxi-aproxi_anterior)/aproxi)*100)
+# ================================ TIPOS DE ERRORES FIN =========================
