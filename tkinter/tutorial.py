@@ -3,6 +3,7 @@ import sys
 from tkinter import font
 # from math import *
 import numpy as np
+from numpy import log as ln
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import text
 sys.path.append("./")

@@ -1,6 +1,7 @@
 import sys
 from math import *
 import numpy as np
+from numpy import log as ln
 
 
 # ============================ REPLACE CHARACTERS ON STRING INI ===================

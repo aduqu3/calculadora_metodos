@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="img_1">
+    <file>images/simpson_13/1.png</file>
+  </qresource>
+  <qresource prefix="img_2">
+    <file>images/simpson_13/2.png</file>
+  </qresource>
+  <qresource prefix="img_3">
+    <file>images/simpson_13/3.png</file>
+  </qresource>
+</RCC>
